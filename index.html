@@ -259,6 +259,62 @@ SECTION 05 - NAVIGATION
 
 </div>
 </div>
+<script>
 
+/* ==================================================
+SECTION 06-A
+GOLD AI PRO V2 CORE ENGINE
+================================================== */
+
+const GoldAI_Core = {
+
+version:"2.0",
+
+symbol:"XAUUSD",
+
+priceSource:"LIVE",
+
+price:4153.82,
+
+capital:100,
+
+lot:0.01,
+
+risk:2,
+
+signal:"WAIT",
+
+confidence:0,
+
+
+updateDashboard:function(){
+
+document.getElementById("price").innerHTML =
+this.price.toFixed(2);
+
+document.getElementById("signal").innerHTML =
+this.signal+" 🟡";
+
+document.getElementById("confidence").innerHTML =
+this.confidence+"%";
+
+document.getElementById("lot").innerHTML =
+this.lot;
+
+document.getElementById("capital").innerHTML =
+this.capital+"$";
+
+document.getElementById("risk").innerHTML =
+this.risk+"%";
+
+}
+
+};
+
+
+GoldAI_Core.updateDashboard();
+
+
+</script>
 </body>
 </html>
