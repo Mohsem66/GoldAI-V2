@@ -433,5 +433,88 @@ return this.calculate(data,200);
 
 
 </script>
+<script>
+
+/* ==================================================
+SECTION 07-B
+RSI ENGINE V2
+================================================== */
+
+const GoldAI_RSI = {
+
+
+calculate:function(data,period=14){
+
+if(data.length <= period){
+
+return null;
+
+}
+
+
+let gains=0;
+let losses=0;
+
+
+for(let i=data.length-period;i<data.length;i++){
+
+let diff=data[i]-data[i-1];
+
+
+if(diff>0){
+
+gains += diff;
+
+}
+else{
+
+losses -= diff;
+
+}
+
+}
+
+
+if(losses===0){
+
+return 100;
+
+}
+
+
+let rs=gains/losses;
+
+
+let rsi=100-(100/(1+rs));
+
+
+return Number(rsi.toFixed(2));
+
+},
+
+
+zone:function(rsi){
+
+if(rsi>=70){
+
+return "OVERBOUGHT";
+
+}
+
+if(rsi<=30){
+
+return "OVERSOLD";
+
+}
+
+return "NORMAL";
+
+}
+
+
+};
+
+
+</script>
 </body>
 </html>
