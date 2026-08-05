@@ -516,5 +516,55 @@ return "NORMAL";
 
 
 </script>
+<script>
+/* ==================================================
+SECTION 07-C
+MACD ENGINE
+================================================== */
+
+const GoldAI_MACD={
+
+calculate:function(data){
+
+if(data.length<26){
+return null;
+}
+
+let ema12=0;
+let ema26=0;
+
+for(let i=data.length-12;i<data.length;i++){
+ema12+=data[i];
+}
+
+for(let i=data.length-26;i<data.length;i++){
+ema26+=data[i];
+}
+
+ema12=ema12/12;
+ema26=ema26/26;
+
+let macd=ema12-ema26;
+
+return Number(macd.toFixed(2));
+
+},
+
+signal:function(macd){
+
+if(macd>0){
+return "BULLISH";
+}
+
+if(macd<0){
+return "BEARISH";
+}
+
+return "NEUTRAL";
+
+}
+
+};
+</script>
 </body>
 </html>
