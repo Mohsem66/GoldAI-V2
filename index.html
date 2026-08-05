@@ -715,5 +715,69 @@ GoldAI_Core.updateDashboard();
 }
 
 </script>
+<script>
+/* ==================================================
+SECTION 10
+SMART TRADE ENGINE
+================================================== */
+
+const GoldAI_Trade={
+
+generate:function(signal,entry,atr){
+
+let sl,tp1,tp2,tp3;
+
+atr=atr || 3;
+
+
+if(signal==="BUY"){
+
+sl=entry-atr;
+
+tp1=entry+(atr*1.5);
+
+tp2=entry+(atr*2.5);
+
+tp3=entry+(atr*4);
+
+}
+
+
+else if(signal==="SELL"){
+
+sl=entry+atr;
+
+tp1=entry-(atr*1.5);
+
+tp2=entry-(atr*2.5);
+
+tp3=entry-(atr*4);
+
+}
+
+
+else{
+
+return null;
+
+}
+
+
+return{
+
+sl:Number(sl.toFixed(2)),
+
+tp1:Number(tp1.toFixed(2)),
+
+tp2:Number(tp2.toFixed(2)),
+
+tp3:Number(tp3.toFixed(2))
+
+};
+
+}
+
+};
+</script>
 </body>
 </html>
