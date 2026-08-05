@@ -566,5 +566,33 @@ return "NEUTRAL";
 
 };
 </script>
+<script>
+/* ==================================================
+SECTION 07-D
+ATR ENGINE
+================================================== */
+
+const GoldAI_ATR={
+
+calculate:function(data,period=14){
+
+if(data.length<=period){
+return null;
+}
+
+let total=0;
+
+for(let i=data.length-period;i<data.length;i++){
+
+total+=Math.abs(data[i]-data[i-1]);
+
+}
+
+return Number((total/period).toFixed(2));
+
+}
+
+};
+</script>
 </body>
 </html>
