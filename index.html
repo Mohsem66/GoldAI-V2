@@ -185,7 +185,7 @@ TRADE SETUP
 
 </div>
 
-<button>
+<button onclick="startAnalysis()">
 START ANALYSIS
 </button>
 
@@ -667,6 +667,53 @@ sellScore:sell
 }
 
 };
+</script>
+<script>
+/* ==================================================
+SECTION 09
+ANALYSIS CONTROLLER
+================================================== */
+
+const priceHistory=[
+4148,4150,4152,4151,4154,
+4156,4153,4155,4158,4157,
+4159,4160,4158,4161,4162,
+4160,4163,4165,4164,4166,
+4167,4165,4168,4169,4170,
+4168,4166,4167,4165,4163
+];
+
+
+function startAnalysis(){
+
+let result=GoldAI_Score.analyze(priceHistory);
+
+GoldAI_Core.signal=result.signal;
+
+GoldAI_Core.confidence=result.confidence;
+
+GoldAI_Core.price=
+GoldAI_Price.getPrice();
+
+
+document.getElementById("signal").innerHTML=
+result.signal+
+(result.signal==="BUY"?" 🟢":
+result.signal==="SELL"?" 🔴":" 🟡");
+
+
+document.getElementById("confidence").innerHTML=
+result.confidence+"%";
+
+
+document.getElementById("entry").innerHTML=
+GoldAI_Core.price.toFixed(2);
+
+
+GoldAI_Core.updateDashboard();
+
+}
+
 </script>
 </body>
 </html>
