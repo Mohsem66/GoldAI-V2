@@ -594,5 +594,79 @@ return Number((total/period).toFixed(2));
 
 };
 </script>
+<script>
+/* ==================================================
+SECTION 08
+SIGNAL SCORE ENGINE
+================================================== */
+
+const GoldAI_Score={
+
+analyze:function(data){
+
+let buy=0;
+let sell=0;
+
+let ema20=GoldAI_EMA.EMA20(data);
+let rsi=GoldAI_RSI.calculate(data);
+let macd=GoldAI_MACD.calculate(data);
+
+if(ema20){
+
+if(data[data.length-1]>Number(ema20)){
+buy+=2;
+}else{
+sell+=2;
+}
+
+}
+
+if(rsi){
+
+if(rsi<30){
+buy+=2;
+}
+
+if(rsi>70){
+sell+=2;
+}
+
+}
+
+if(macd){
+
+if(macd>0){
+buy+=1;
+}else{
+sell+=1;
+}
+
+}
+
+let confidence=Math.abs(buy-sell)*20;
+
+let signal="WAIT";
+
+if(buy>sell){
+signal="BUY";
+}
+
+if(sell>buy){
+signal="SELL";
+}
+
+return{
+
+signal:signal,
+confidence:Math.min(confidence,100),
+buyScore:buy,
+sellScore:sell
+
+};
+
+}
+
+};
+</script>
 </body>
 </html>
