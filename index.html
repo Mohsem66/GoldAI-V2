@@ -311,6 +311,68 @@ this.risk+"%";
 
 };
 
+GoldAI_Core.updateDashboard();
+
+</script>
+<script>
+
+/* ==================================================
+SECTION 06-B
+PRICE SOURCE ENGINE
+================================================== */
+
+const GoldAI_Price = {
+
+mode:"LIVE",
+
+livePrice:4153.82,
+
+manualPrice:null,
+
+mt5Price:null,
+
+
+getPrice:function(){
+
+if(this.mode==="MANUAL" && this.manualPrice){
+
+return this.manualPrice;
+
+}
+
+
+if(this.mode==="MT5" && this.mt5Price){
+
+return this.mt5Price;
+
+}
+
+
+return this.livePrice;
+
+},
+
+
+setManual:function(price){
+
+this.manualPrice=Number(price);
+
+},
+
+
+setMT5:function(price){
+
+this.mt5Price=Number(price);
+
+}
+
+};
+
+
+
+GoldAI_Core.price =
+GoldAI_Price.getPrice();
+
 
 GoldAI_Core.updateDashboard();
 
