@@ -312,7 +312,7 @@ this.risk+"%";
 };
 
 GoldAI_Core.updateDashboard();
-
+updateTradeSetup();
 </script>
 <script>
 
@@ -778,6 +778,55 @@ tp3:Number(tp3.toFixed(2))
 }
 
 };
+</script>
+<script>
+/* ==================================================
+SECTION 11
+TRADE RESULT CONNECTOR
+================================================== */
+
+function updateTradeSetup(){
+
+let signal=GoldAI_Core.signal;
+
+let entry=GoldAI_Core.price;
+
+let atr=GoldAI_ATR.calculate(priceHistory) || 3;
+
+let trade=GoldAI_Trade.generate(
+signal,
+entry,
+atr
+);
+
+
+if(!trade){
+return;
+}
+
+
+document.getElementById("sl").innerHTML=
+trade.sl;
+
+document.getElementById("tp1").innerHTML=
+trade.tp1;
+
+document.getElementById("tp2").innerHTML=
+trade.tp2;
+
+document.getElementById("tp3").innerHTML=
+trade.tp3;
+
+
+let rr=
+Math.abs((trade.tp2-entry)/(entry-trade.sl));
+
+
+document.getElementById("rr").innerHTML=
+"1:"+rr.toFixed(1);
+
+}
+
 </script>
 </body>
 </html>
