@@ -712,6 +712,7 @@ GoldAI_Core.price.toFixed(2);
 
 GoldAI_Core.updateDashboard();
 updateTradeSetup();
+GoldAI_History.save();
 }
 
 </script>
@@ -826,6 +827,68 @@ document.getElementById("rr").innerHTML=
 "1:"+rr.toFixed(1);
 
 }
+
+</script>
+<script>
+/* ==================================================
+SECTION 12
+HISTORY ENGINE
+================================================== */
+
+const GoldAI_History={
+
+key:"GoldAI_History",
+
+save:function(){
+
+let history=JSON.parse(
+localStorage.getItem(this.key)||"[]"
+);
+
+history.unshift({
+
+time:new Date().toLocaleString(),
+
+signal:GoldAI_Core.signal,
+
+entry:GoldAI_Core.price,
+
+confidence:GoldAI_Core.confidence
+
+});
+
+
+if(history.length>20){
+
+history.pop();
+
+}
+
+
+localStorage.setItem(
+this.key,
+JSON.stringify(history)
+);
+
+},
+
+
+get:function(){
+
+return JSON.parse(
+localStorage.getItem(this.key)||"[]"
+);
+
+},
+
+
+clear:function(){
+
+localStorage.removeItem(this.key);
+
+}
+
+};
 
 </script>
 </body>
