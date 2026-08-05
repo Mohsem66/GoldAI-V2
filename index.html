@@ -376,6 +376,61 @@ GoldAI_Price.getPrice();
 
 GoldAI_Core.updateDashboard();
 
+</script>
+<script>
+
+/* ==================================================
+SECTION 07-A
+EMA ENGINE
+================================================== */
+
+const GoldAI_EMA = {
+
+
+calculate:function(data,period){
+
+if(data.length < period){
+return null;
+}
+
+
+let sum = 0;
+
+for(let i=data.length-period;i<data.length;i++){
+
+sum += data[i];
+
+}
+
+
+return (sum/period).toFixed(2);
+
+},
+
+
+EMA20:function(data){
+
+return this.calculate(data,20);
+
+},
+
+
+EMA50:function(data){
+
+return this.calculate(data,50);
+
+},
+
+
+EMA200:function(data){
+
+return this.calculate(data,200);
+
+}
+
+
+};
+
 
 </script>
 </body>
